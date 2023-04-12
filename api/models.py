@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 
@@ -36,3 +37,16 @@ class RoomEquipment(models.Model):
     
     class Meta:
         verbose_name_plural = 'Оснащение номера'
+
+
+class BookingRoom(models.Model):
+    visitor = models.ForeignKey(User, on_delete=models.CASCADE)
+    room = models.ForeignKey(Rooms, on_delete=models.CASCADE)
+    time_of_settlement = models.DateField()
+    eviction_time = models.DateField()
+
+    def __str__(self):
+        return self.visitor
+
+    class Meta:
+        verbose_name_plural = "Бронирование Комнат"

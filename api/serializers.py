@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import CategoryRooms, RoomEquipment, Rooms
+from api.models import BookingRoom, CategoryRooms, RoomEquipment, Rooms
 
 
 class RoomEquipmentSerializer(serializers.ModelSerializer):
@@ -23,3 +23,12 @@ class CategoryRoomsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class BookingRoomSerializer(serializers.ModelSerializer):
+    """Сериализатор Бронирование Комнат"""
+
+    visitor = serializers.SlugRelatedField(slug_field="username", read_only=True)
+    room = serializers.SlugRelatedField(slug_field="title", queryset=Rooms.objects.all())
+
+    class Meta:
+        model = BookingRoom
+        exclude = ('id', )
