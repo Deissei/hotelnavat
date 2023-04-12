@@ -19,7 +19,7 @@ class Rooms(models.Model):
     ploshadM2 = models.CharField(max_length=8)
     sizeBed = models.CharField(max_length=9)
     priceInDay = models.IntegerField()
-    roomEquipment = models.ManyToManyField('RoomEquipment', null=True, blank=True)
+    roomEquipment = models.ManyToManyField('RoomEquipment')
 
     def __str__(self) -> str:
         return self.title
